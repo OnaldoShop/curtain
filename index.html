@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onaldo shop 스마트 전동커튼 선택 가이드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px;
+            animation: gradientShift 10s ease infinite; background-size: 200% 200%;
+        }
+        @keyframes gradientShift { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
+
+        .container { background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-radius: 30px; padding: 40px 50px; max-width: 900px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.3); transform: translateY(0); transition: all .5s cubic-bezier(.4,0,.2,1); }
+        .container:hover { transform: translateY(-5px); box-shadow: 0 25px 70px rgba(0,0,0,.35); }
+
+        .step-indicator { display:flex; justify-content:center; margin-bottom:30px; gap:10px; }
+        .step-dot { width:12px; height:12px; border-radius:50%; background:#e0e0e0; transition: all .3s ease; }
+        .step-dot.active { background: linear-gradient(135deg, #667eea, #764ba2); transform: scale(1.3); box-shadow: 0 0 15px rgba(102,126,234,.5); }
+
+        .brand-title { text-align:center; color:#424242; font-size:36px; font-weight:bold; margin-bottom:10px; animation: pulse 2s ease infinite; }
+        h1 { text-align:center; color:#333; margin-bottom:50px; font-size:18px; font-style: italic; background: linear-gradient(135deg, #5f5f5f, #bebebe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.8} }
+
+        .question { font-size:22px; color:#4b4b4b; margin-bottom:20px; text-align:left; line-height:1.6; animation: fadeIn .5s ease; font-weight:700; }
+        @keyframes fadeIn { from{opacity:0; transform:translateY(-10px)} to{opacity:1; transform:translateY(0)} }
+
+        .warning-text { color:#e74c3c; font-weight:600; margin-bottom:20px; text-align:center; animation: warningPulse 2s ease infinite; }
+        @keyframes warningPulse { 0%,100%{opacity:1} 50%{opacity:.7} }
+
+        .options { display:flex; flex-direction:column; gap:15px; animation: slideUp .5s ease; }
+        @keyframes slideUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+
+        .option {
+            background: linear-gradient(135deg, #f5f5f5, #ffffff);
+            border:2px solid transparent;
+            border-radius:15px;
+            padding:20px;
+            cursor:pointer;
+            transition: all .3s cubic-bezier(.4,0,.2,1);
+            position:relative;
+            overflow:hidden;
+        }
+        .option::before { content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(168, 108, 255, 0.1), transparent); transition:left .5s ease; }
+        .option:hover::before { left:100%; }
+        .option:hover {
+            transform: translateX(10px);
+            background: linear-gradient(135deg, #a86cff, #c192ff);
+            color:#fff;
+            box-shadow:0 10px 30px rgba(168, 108, 255, 0.3);
+        }
+
+    
+        .option-text { font-size:16px; color:#333; transition:color .3s ease; font-weight: 500; }
+        .option:hover .option-text { color:#fff; }
+        .option-desc { font-size:14px; color:#666; margin-top:5px; transition:color .3s ease; line-height: 1.4; }
+        .option:hover .option-desc { color: rgba(255,255,255,.9); }
+
+        /* 개선된 결과 페이지 스타일 */
+        .result { 
+            background: linear-gradient(135deg, #5a6eb8, #8ba4e8, #b8a4e8, #e8b4d4);
+            color:#fff; 
+            padding:40px; 
+            border-radius:20px; 
+            animation: bounceIn .6s ease; 
+            box-shadow: 0 15px 40px rgba(90, 110, 184, 0.3);
+            text-align: left; /* 왼쪽 정렬로 변경 */
+        }
+        @keyframes bounceIn { 0%{opacity:0; transform:scale(.3)} 50%{transform:scale(1.05)} 100%{opacity:1; transform:scale(1)} }
+        
+        /* 결과 제목 스타일 통일 */
+        .result h2 { 
+            font-size: 20px; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,.2);
+            line-height: 1.3;
+        }
+        
+        /* 결과 본문 텍스트 */
+        .result p { 
+            font-size: 16px; 
+            line-height: 1.6; 
+            margin-bottom: 15px; 
+            opacity: .95;
+        }
+        
+        /* 강조 텍스트 */
+        .result b, .result strong { 
+            font-weight: 700; 
+            color: #fff;
+        }
+        
+        /* 소제목 스타일 */
+        .result h3, .result h4 { 
+            font-size: 16px; 
+            font-weight: 600; 
+            margin: 20px 0 10px 0; 
+            color: #fff;
+        }
+        
+        /* 리스트 스타일 개선 */
+        .result ul { 
+            margin: 15px 0; 
+            padding-left: 20px; 
+        }
+        .result li { 
+            margin-bottom: 8px; 
+            font-size: 16px; 
+            line-height: 1.5;
+        }
+        
+        /* 링크 스타일 */
+        .result a { 
+            color:#fff; 
+            background: rgba(255,255,255,.2); 
+            padding:12px 20px; 
+            border-radius:10px; 
+            text-decoration:none; 
+            display:inline-block; 
+            margin:15px 0; 
+            transition: all .3s ease;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .result a:hover { 
+            background: rgba(255,255,255,.3); 
+            transform: translateY(-2px); 
+        }
+        
+        /* 정보 박스 스타일 */
+        .info-box {
+            background: rgba(255,255,255,.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 4px solid rgba(255,255,255,.5);
+        }
+        
+        .info-box h3, .info-box h4 {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .info-box ul {
+            margin: 10px 0;
+        }
+        
+        .info-box li {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .info-box p {
+            font-size: 16px;
+            margin-top: 15px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .back-button, .restart-button { 
+            margin-top:20px; 
+            margin-right:10px;
+            padding:12px 30px; 
+            border:none; 
+            border-radius:25px; 
+            font-size:16px; 
+            font-weight:600; 
+            cursor:pointer; 
+            transition: all .3s ease; 
+            display:inline-block;
+        }
+        
+        .back-button { 
+            background:#fff; 
+            color:#667eea; 
+            box-shadow: 0 5px 15px rgba(0,0,0,.1); 
+        }
+        .back-button:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(0,0,0,.15); 
+            background:#f8f8f8; 
+        }
+        
+        .restart-button { 
+            background: linear-gradient(135deg, #667eea, #764ba2); 
+            color:#fff; 
+            box-shadow: 0 5px 15px rgba(102,126,234,.3); 
+        }
+        .restart-button:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(102,126,234,.4); 
+        }
+
+        @media (max-width: 768px) { 
+            .container{padding:30px 25px; max-width:100%} 
+            h1{font-size:24px} 
+            .question{font-size:18px} 
+            .option-text{font-size:15px}
+            .result h2 { font-size: 24px; }
+            .result p { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="step-indicator" id="stepIndicator">
+            <span class="step-dot active"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+        </div>
+
+        <div class="brand-title">Onaldo Shop</div>
+        <h1>스마트 전동커튼 선택 가이드 (zigbee / Wi-Fi / matter)</h1>
+
+        <div id="content"></div>
+    </div>
+
+    <script>
+        let currentStep = '1';
+        let history = [];
+
+        function goToStep(stepId) { history.push(currentStep); currentStep = stepId; showStep(stepId); }
+        function goBack() { if (history.length > 0) { currentStep = history.pop(); showStep(currentStep); } }
+        function restart() { currentStep = '1'; history = []; showStep('1'); }
+
+        function showStep(stepId) {
+            const content = document.getElementById('content');
+            let html = '';
+            let buttons = '';
+            
+            switch(stepId) {
+                case '1':
+                    html = `
+                        <div class="question">[질문] 현재 스마트홈 기기를 사용하고 계신가요?</div>
+                        <div class="options">
+                            <div class="option" onclick="goToStep('1-1')">
+                                
+                                <span class="option-text">처음 사용해봐요</span>
+                                <div class="option-desc">스마트홈 기기를 사용해본 적이 없어요</div>
+                            </div>
+                            <div class="option" onclick="goToStep('1-2')">
+                               
+                                <span class="option-text">10개 내외로 사용중이에요</span>
+                                <div class="option-desc">스마트 전구, 콘센트 등 몇 개 기기를 사용하고 있어요</div>
+                            </div>
+                            <div class="option" onclick="goToStep('3')">
+                                
+                                <span class="option-text">스마트홈 장치 많이 사용하고 있어요</span>
+                                <div class="option-desc">zigbee 와 matter 어떤 것을 선택할 지 고민이에요</div>
+                            </div>
+                        </div>`;
+                    buttons = '';
+                    break;
+
+                case '1-1':
+                    html = `
+                        <div class="question">[질문] 전동커튼을 설치하는 장소(집)에 공유기가 있나요?</div>
+                        <div class="options">
+                            <div class="option" onclick="goToStep('1-1-2')">
+                                
+                                <div class="option-content">
+                                    <div class="option-text">네, 있어요</div>
+                                </div>
+                            </div>
+                            <div class="option" onclick="goToStep('1-1-1')">
+                                
+                                <div class="option-content">
+                                    <div class="option-text">아니오, 없어요</div>
+                                </div>
+                            </div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-1-1':
+                    html = `
+                        <div class="question">[질문] 추후에 스마트홈을 확장할 계획이 있으신가요?</div>
+                        <div class="warning-text">⚠️ 공유기가 없으면 스마트 기능을 사용할 수 없고 리모컨으로만 제어할 수 있습니다 ⚠️</div>
+                        <div class="options">
+                            <div class="option" onclick="goToStep('1-3')"><span class="option-text">네, 전동 커튼을 시작으로 확장할 계획이에요. 공유기도 설치할 예정이에요.</span></div>
+                            <div class="option" onclick="showResult('wifi-no-router')"><span class="option-text">아니오, 전동 커튼을 리모컨으로만 제어해도 돼요</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-1-2':
+                    html = `
+                        <div class="question">[질문] 추후에 스마트홈을 확장할 계획이 있으신가요?</div>
+                        <div class="options">
+                            <div class="option" onclick="goToStep('1-3')"><span class="option-text">네, 전동 커튼을 시작으로 확장할 계획이에요</span></div>
+                            <div class="option" onclick="showResult('simple')"><span class="option-text">아니오, 스마트 전동 커튼만 있으면 돼요</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-2':
+                    html = `
+                        <div class="question">[질문] 사용중인 메인 플랫폼이 있나요?</div>
+                        <div class="options">
+                            <div class="option" onclick="goToStep('1-2-1')"><span class="option-text">스마트싱스</span></div>
+                            <div class="option" onclick="goToStep('1-2-2')"><span class="option-text">애플 홈킷</span></div>
+                            <div class="option" onclick="showResult('google-existing')"><span class="option-text">구글홈</span></div>
+                            <div class="option" onclick="showResult('aqara')"><span class="option-text">아카라</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-2-1':
+                    html = `
+                        <div class="question">[질문] 스마트싱스 허브나 스마트싱스 스테이션을 가지고 계신가요?</div>
+                        <div class="options">
+                            <div class="option" onclick="goToStep('1-2-1-1')"><span class="option-text">네, 있습니다</span></div>
+                            <div class="option" onclick="showResult('smartthings-buy-hub')"><span class="option-text">아니오, 없습니다</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-2-1-1':
+                    html = `
+                        <div class="question">[질문] 스마트싱스 이외에 다른 플랫폼도 사용하시나요?</div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('smartthings-only')"><span class="option-text">스마트싱스만 사용할거에요</span></div>
+                            <div class="option" onclick="showResult('smartthings-homekit')"><span class="option-text">스마트싱스도 사용하면서 애플 홈킷도 동시에 사용해보고 싶어요</span></div>
+                            <div class="option" onclick="goToStep('1-2-1-1-3')"><span class="option-text">구글홈 앱도 같이 사용해보고 싶어요</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-2-1-1-3':
+                    html = `
+                        <div class="question">[질문] 원하는 연결 방식을 선택하세요</div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('zigbee-google')"><span class="option-text">계정 연동 (서버간 연동방식)</span></div>
+                            <div class="option" onclick="showResult('matter-google')"><span class="option-text">로컬 연동</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-2-2':
+                    html = `
+                        <div class="question">[질문] 애플 홈킷에 연결하기 위해서는 matter 컨트롤러가 있어야합니다.</div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('matter-existing')"><span class="option-text">matter 컨트롤러 가지고 있습니다</span></div>
+                            <div class="option" onclick="goToStep('1-2-2-2')"><span class="option-text">matter 컨트롤러가 뭐죠..?</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-2-2-2':
+                    html = `
+                        <div class="question">[질문] Apple HomeKit 매터 컨트롤러 안내</div>
+                        <div class="info-box">
+                            <h4>matter 컨트롤러 역할을 하는 Apple 제품들</h4>
+                            <ul>
+                                <li>Apple Homepod Mini</li>
+                                <li>Apple Homepod (2gen)</li>
+                                <li>Apple TV 4K (2021 ver)</li>
+                                <li>Apple TV 4K Wi‑Fi + Ethernet (2022 ver)</li>
+                                <li>Apple Homepod (1gen)</li>
+                                <li>Apple TV 4K Wi‑Fi (2022 ver)</li>
+                            </ul>
+                            <p>⚠️ 위의 제품이 하나도 없다면 matter 모터를 사용할 수 없습니다</p>
+                        </div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('no-homekit')"><span class="option-text">matter 컨트롤러가 없는데 구입하고 싶지도 않습니다</span></div>
+                            <div class="option" onclick="showResult('matter-appletv')"><span class="option-text">이번 기회에 애플TV 하나 구입하죠 뭐</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-3':
+                    html = `
+                        <div class="question">[질문] 선호하는 스마트홈 플랫폼이 있으신가요? 없다면 사용하는 핸드폰 기종을 선택하세요</div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('smartthings-hub')"><span class="option-text">삼성 스마트싱스를 사용하고 싶어요</span></div>
+                            <div class="option" onclick="goToStep('1-3-2')"><span class="option-text">애플 홈킷을 사용하고 싶어요</span></div>
+                            <div class="option" onclick="goToStep('1-3-3')"><span class="option-text">잘 모르겠지만 갤럭시 사용중이에요</span></div>
+                            <div class="option" onclick="goToStep('1-3-4')"><span class="option-text">잘 모르겠지만 아이폰 사용중이에요</span></div>
+                            <div class="option" onclick="goToStep('1-3-5')"><span class="option-text">잘 모르겠지만 가족들이 갤럭시와 아이폰을 사용중이에요</span></div>
+                            <div class="option" onclick="showResult('google-home')"><span class="option-text">구글홈 사용하고 싶어요</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-3-2':
+                    html = `
+                        <div class="question">[질문] 애플 홈킷에 연결하기 위해서는 matter 컨트롤러가 있어야합니다.</div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('matter')"><span class="option-text">matter 컨트롤러 가지고 있습니다</span></div>
+                            <div class="option" onclick="goToStep('1-3-2-2')"><span class="option-text">matter 컨트롤러가 뭐죠..?</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-3-2-2':
+                    html = `
+                        <div class="question">[질문] Apple HomeKit matter 컨트롤러 안내</div>
+                        <div class="info-box">
+                            <h4>matter 컨트롤러 역할을 하는 Apple 제품들</h4>
+                            <ul>
+                                <li>Apple Homepod Mini</li>
+                                <li>Apple Homepod (2gen)</li>
+                                <li>Apple TV 4K (2021 ver)</li>
+                                <li>Apple TV 4K Wi‑Fi + Ethernet (2022 ver)</li>
+                                <li>Apple Homepod (1gen)</li>
+                                <li>Apple TV 4K Wi‑Fi (2022 ver)</li>
+                            </ul>
+                            <p>위의 제품이 하나도 없다면 matter 모터를 사용할 수 없습니다</p>
+                        </div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('matter2')"><span class="option-text">matter 컨트롤러를 구입해서 애플 홈킷에서 사용할게요</span></div>
+                            <div class="option" onclick="showResult('wifi-iphone')"><span class="option-text">홈킷말고 그냥 아이폰에서 다른앱으로 사용할 수 있는 방법은 없나요?</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-3-3':
+                    html = `
+                        <div class="question">[질문] 스마트홈을 어디까지 확장하고 싶으신가요?</div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('galaxy-light')"><span class="option-text">가볍게 사용하고 싶어요. 가전 제외하고 5개 내외..?</span></div>
+                            <div class="option" onclick="showResult('galaxy-heavy')"><span class="option-text">많은 장치들로 지속적으로 스마트홈을 꾸며보고 싶어요</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-3-4':
+                    html = `
+                        <div class="question">[질문] 애플의 스마트홈 플랫폼인 HomeKit을 사용하고 싶으신가요?</div>
+                        <div class="options">
+                            <div class="option" onclick="goToStep('1-3-2')"><span class="option-text">네, 애플 홈킷을 사용하고 싶어요</span></div>
+                            <div class="option" onclick="showResult('iphone-app')"><span class="option-text">아니오, 그냥 아이폰에서 다른앱으로 사용해도 상관없어요</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-3-5':
+                    html = `
+                        <div class="question">[질문] 스마트싱스와 애플 홈킷을 동시에 사용하고 싶으신가요?</div>
+                        <div class="options">
+                            <div class="option" onclick="goToStep('1-3-5-1')"><span class="option-text">네, 두 플랫폼을 동시에 사용하고 싶어요</span></div>
+                            <div class="option" onclick="showResult('wifi-family')"><span class="option-text">아니오, 스마트싱스와 홈킷이 아니더라도 그냥 앱에서만 되면 좋겠어요</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-3-5-1':
+                    html = `
+                        <div class="question">[질문] 스마트싱스와 애플 홈킷을 지원하는 matter 컨트롤러를 가지고 계신가요?</div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('matter-both')"><span class="option-text">네, 두 플랫폼 모두 matter 컨트롤러 가지고 있습니다</span></div>
+                            <div class="option" onclick="goToStep('1-3-5-1-2')"><span class="option-text">matter 컨트롤러가 뭐죠..?</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '1-3-5-1-2':
+                    html = `
+                        <div class="question">[질문] 아래의 제품이 있어야 해당 플랫폼에서 matter 장치를 사용할 수 있습니다</div>
+                        <div class="info-box">
+                            <h4>Apple HomeKit matter 컨트롤러</h4>
+                            <ul>
+                                <li>Apple Homepod Mini</li>
+                                <li>Apple Homepod (2gen)</li>
+                                <li>Apple TV 4K (2021 ver)</li>
+                                <li>Apple TV 4K Wi‑Fi + Ethernet (2022 ver)</li>
+                                <li>Apple Homepod (1gen)</li>
+                                <li>Apple TV 4K Wi‑Fi (2022 ver)</li>
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <h4>SmartThings matter 컨트롤러</h4>
+                            <ul>
+                                <li>SmartThings Hub 2세대</li>
+                                <li>SmartThings Hub 3세대</li>
+                                <li>SmartThings Hub 4세대</li>
+                                <li>SmartThings Station</li>
+                                <li>최신 삼성 가전 일부 - 스펙 확인</li>
+                            </ul>
+                            <a href="https://mkt.shopping.naver.com/link/68a51c197e34a52f79bdeadd" target="_blank">🛒 스마트싱스 허브 4세대 구입 링크 (30% 할인)</a>
+                        </div>
+                        <div class="options">
+                            <div class="option" onclick="showResult('matter-buy')"><span class="option-text">지금은 없는데 구입해서 연결할게요</span></div>
+                            <div class="option" onclick="showResult('wifi-simple')"><span class="option-text">지출을 더 하면서 구입하고 싶지는 않아요</span></div>
+                        </div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+                    break;
+
+                case '3':
+                    showResult('expert');
+                    return;
+
+                default:
+                    html = `<div class="question">페이지를 준비중입니다... (${stepId})</div>`;
+                    buttons = '<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>';
+            }
+            
+            content.innerHTML = html + buttons;
+            updateStepIndicator();
+        }
+
+        function showResult(type) {
+            const content = document.getElementById('content');
+            let html = '';
+            switch(type) {
+                case 'wifi-no-router':
+                    html = `
+                        <div class="result">
+                            <h2>WiFi 모터를 선택하세요</h2>
+                            <p>✓ 공유기가 없으니 스마트 기능은 사용할 수 없지만, <strong>공유기만 있으면 스마트 기능을 사용할 수 있습니다.</strong></p>
+                            <p>✓ 추후 공유기 설치 시 바로 스마트 기능 활용 가능</p>
+                        </div>`; 
+                    break;
+
+                case 'simple':
+                    html = `
+                        <div class="result">
+                            <h2>추천: WiFi 전동 커튼</h2>
+                            <p>✓ <strong>WiFi 버전</strong>을 선택해서 <strong>SmartLife 앱</strong>에 연결해서 사용하세요</p>
+                            <p>✓ 설치가 간단하고 별도의 허브 없이 사용 가능합니다</p>
+                        </div>`; 
+                    break;
+
+                case 'smartthings-hub':
+                    html = `
+                        <div class="result">
+                            <h2>스마트싱스 허브 4세대 구입을 추천드립니다</h2>
+                            <p><strong>✓ 스마트싱스 허브 4세대 구입</strong> 및 <strong>Zigbee 모터</strong> 선택을 추천합니다!</p>
+                            <a href="https://mkt.shopping.naver.com/link/68a51c197e34a52f79bdeadd" target="_blank">✓ 클릭! 🛒 스마트싱스 허브 4세대 구입 링크 (30% 할인)</a>
+                        </div>`; 
+                    break;
+
+                case 'google-home':
+                    html = `
+                        <div class="result">
+                            <h2>Google Home 사용자 추천</h2>
+                            <p>✓ <strong>WiFi 버전</strong>을 선택해서 <strong>SmartLife</strong> 앱에 연결해서 사용하세요.</p>
+                            <p>✓ 설치가 간단하고 별도의 허브 없이 사용 가능합니다.</p>
+                            <p>✓ 구글홈에 연동하여 구글홈 앱 제어 및 음성명령 가능.</p>
+                        </div>`; 
+                    break;
+
+                case 'expert':
+                    html = `
+                        <div class="result">
+                            <h2>전문가를 위한 추천</h2>
+                            <p>✓ 스마트홈이 Zigbee 장치로 이미 구성이 되어 있다면 <strong>zigbee 모터</strong> 추천</p>
+                            <p>✓ 보급형 공유기가 아니고 <strong>matter</strong> 생태계를 확장시키고자 한다면 <strong>matter 모터</strong> 추천</p>
+                            <p>✓ 가족들이 갤럭시, 아이폰이 섞여 있고 다양한 플랫폼을 동시에 사용하고자 한다면 <strong>matter 모터</strong> 추천</p>
+                            <p>✓ 단, 각 플랫폼별 매터 컨트롤러가 있는 경우 추천</p>
+                        </div>`; 
+                    break;
+
+                case 'google-existing':
+                    html = `
+                        <div class="result">
+                            <h2>Google Home 사용자</h2>
+                            <p><strong>matter 버전</strong>을 선택해서 구글홈 앱에 <strong>matter</strong>로 연결하세요.</p>
+                            <div class="info-box">
+                                <h4>Google Home 매터 컨트롤러 필요</h4>
+                                <ul>
+                                    <li>Google Nest Hub (2gen)</li>
+                                    <li>Google Nest Hub Max</li>
+                                    <li>Google Nest WiFi Pro</li>
+                                    <li>Google Nest Audio</li>
+                                    <li>Google Nest Mini</li>
+                                    <li>Google Nest Hub (1gen)</li>
+                                    <li>Google Home Mini</li>
+                                    <li>Google Home</li>
+                                </ul>
+                            </div>
+                            <p>✓ <strong>WiFi 버전</strong>을 선택해서 <strong>SmartLife</strong> 앱에 연결해서 사용하세요. 
+                            <p>✓ 설치 간단, 허브 불필요.</p> 
+                            <p>✓ 구글홈 앱 제어 및 음성명령 가능.</p>
+                        </div>`; 
+                    break;
+
+                case 'aqara':
+                    html = `
+                        <div class="result">
+                            <h2>ℹ️ 아카라는 다음 기회에..</h2>
+                            <p>✓ 아카라 모터는 이번 공구에서 진행하지 않습니다.</p>
+                            <p>✓ 아카라 모터 공구를 원하시면 유튜브 영상에 댓글을 남겨주세요!</p>
+                        </div>`; 
+                    break;
+
+                case 'smartthings-buy-hub':
+                    html = `
+                        <div class="result">
+                            <h2>✓ SmartThings 허브 추천</h2>
+                            <p><strong>스마트싱스 허브</strong> 구입을 추천! 이후 <strong>Zigbee 버전</strong> 모터를 선택하세요.</p>
+                            <a href="https://mkt.shopping.naver.com/link/68a51c197e34a52f79bdeadd" target="_blank">스마트싱스 허브 4세대 구입 링크 (30% 할인)</a>
+                        </div>`; 
+                    break;
+
+                case 'smartthings-only':
+                    html = `
+                        <div class="result">
+                            <h2>SmartThings만 사용</h2>
+                            <p>✓ 이미 <strong>Zigbee 제품 5개 이상</strong> 보유 시 → <strong>Zigbee 모터</strong> 추천</p>
+                            <p>✓ 향후 <strong>matter</strong> 생태계를 확장할 계획이라면 → <strong>matter 모터</strong> 추천</p>
+                        </div>`; 
+                    break;
+
+                case 'smartthings-homekit':
+                    html = `
+                        <div class="result">
+                            <h2>SmartThings + HomeKit 병행</h2>
+                            <p>✓ <strong>matter 제품</strong>을 선택하세요. </p>
+                            <p>✓ (HomeKit 연결에는 <strong>matter 컨트롤러</strong> 필요)</p>
+                            <div class="info-box">
+                                <h4>Apple HomeKit 매터 컨트롤러</h4>
+                                <ul>
+                                    <li>Apple HomePod mini</li>
+                                    <li>Apple HomePod (2gen)</li>
+                                    <li>Apple TV 4K (2021 ver)</li>
+                                    <li>Apple TV 4K Wi‑Fi + Ethernet (2022 ver)</li>
+                                    <li>Apple HomePod (1gen)</li>
+                                    <li>Apple TV 4K Wi‑Fi (2022 ver)</li>
+                                </ul>
+                            </div>
+                        </div>`; 
+                    break;
+
+                case 'zigbee-google':
+                    html = `
+                        <div class="result">
+                            <h2>Google Home (계정 연동)</h2>
+                            <p>✓ <strong>Zigbee 모터</strong> 선택 후 Google Home과 <strong>계정 연동</strong>하세요.</p>
+                        </div>`; 
+                    break;
+
+                case 'matter-google':
+                    html = `
+                        <div class="result">
+                            <h2>Google Home (로컬 연동)</h2>
+                            <p>✓ <strong>matter 모터</strong> 선택 후 Google Home과 <strong>matter</strong>로 로컬 연동하세요.</p>
+                            <div class="info-box">
+                                <h4>Google Home 매터 컨트롤러 필요</h4>
+                                <ul>
+                                    <li>Google Nest Hub (2gen)</li>
+                                    <li>Google Nest Hub Max</li>
+                                    <li>Google Nest WiFi Pro</li>
+                                    <li>Google Nest Audio</li>
+                                    <li>Google Nest Mini</li>
+                                    <li>Google Nest Hub (1gen)</li>
+                                    <li>Google Home Mini</li>
+                                    <li>Google Home</li>
+                                </ul>
+                            </div>
+                        </div>`; 
+                    break;
+
+                case 'matter-existing':
+                    html = `
+                        <div class="result">
+                            <h2>HomeKit 사용자</h2>
+                            <p>✓ <strong>matter 버전 모터</strong>를 선택하세요.</p>
+                        </div>`; 
+                    break;
+
+                case 'no-homekit':
+                    html = `
+                        <div class="result">
+                            <h2>ℹ️ HomeKit 연결 불가</h2>
+                            <p>✓ 애플 홈킷에 연결할 수 있는 방법이 없습니다.</p>
+                            <p>✓ <strong>WiFi 모터</strong>를 선택하여 <strong>SmartLife</strong> 앱에서 사용하세요.</p>
+                            <p>✓ 애플 <strong>단축어</strong>를 통한 Siri 음성명령은 가능합니다.</p>
+                        </div>`; 
+                    break;
+
+                case 'matter-appletv':
+                    html = `
+                        <div class="result">
+                            <h2>매터 컨트롤러 구입 필수!</h2>
+                            <p>✓ <strong>matter 버전 모터</strong>를 선택하세요.</p>
+                        </div>`; 
+                    break;
+
+                case 'matter':
+                    html = `
+                        <div class="result">
+                            <h2>HomeKit 사용자</h2>
+                            <p>✓ <strong>matter 버전 모터</strong>를 선택하세요.</p>
+                        </div>`; 
+                    break;
+
+                case 'matter2':
+                    html = `
+                        <div class="result">
+                            <h2>HomeKit (matter 컨트롤러 구입 예정)</h2>
+                            <p>✓ <strong>matter 버전 모터</strong>를 선택하세요.</p>
+                        </div>`; 
+                    break;
+
+                case 'wifi-iphone':
+                    html = `
+                        <div class="result">
+                            <h2>Wi-Fi 모터 선택</h2>
+                            <p>✓ <strong>WiFi 버전</strong>을 선택해서 <strong>SmartLife</strong> 앱에 연결해 사용하세요.</p>
+                            <p>✓ 설치가 간단하고 별도의 허브 없이 사용 가능합니다.</p>
+                            <p>✓ 구글홈 연동 및 애플 <strong>단축어</strong>로 Siri 음성명령도 가능.</p>
+                            <p>✓ 그래도 저는 Apple TV 하나 구입해서 matter로 가는 걸 추천합니다 ^^;</p>
+                        </div>`; 
+                    break;
+
+                case 'galaxy-light':
+                    html = `
+                        <div class="result">
+                            <h2>갤럭시 사용자 가벼운 구성</h2>
+                            <p>✓ <strong></strong> <strong>WiFi 모터</strong> + SmartLife 앱 → Google Home 연동으로 음성명령</p>
+                            <p>✓ <strong></strong> <strong>Zigbee 모터</strong> + SmartThings 허브 → 초기비용 증가하지만 확장성↑</p>
+                        </div>`; 
+                    break;
+
+                case 'galaxy-heavy':
+                    html = `
+                        <div class="result">
+                            <h2>✓ 스마트싱스 확장</h2>
+                            <p>✓ <strong>Zigbee 모터</strong> + <strong>스마트싱스 허브 4세대</strong> 추천! (안정성/확장성/자동화 최적)</p>
+                            <a href="https://mkt.shopping.naver.com/link/68a51c197e34a52f79bdeadd" target="_blank">스마트싱스 허브 4세대 구입 링크 (30% 할인)</a>
+                        </div>`; 
+                    break;
+
+                case 'iphone-app':
+                    html = `
+                        <div class="result">
+                            <h2>WiFi 모터 선택</h2>
+                            <p>✓ <strong>WiFi 모터</strong>를 선택해서 <strong>SmartLife</strong> 앱에 연결하세요.</p>
+                            <p>✓ 구글홈 연동으로 음성명령 가능, 애플 <strong>단축어</strong>로 Siri 음성명령도 가능.</p>
+                        </div>`; 
+                    break;
+
+                case 'wifi-family':
+                    html = `
+                        <div class="result">
+                            <h2>갤럭시/아이폰 혼합 사용</h2>
+                            <p>✓ <strong>WiFi 버전</strong>을 선택해서 <strong>SmartLife</strong> 앱에 연결해서 사용하세요.</p>
+                            <p>✓ 설치가 간단하고 별도의 허브 없이 사용 가능합니다.</p>
+                            <p>✓ 구글홈 연동 및 애플 단축어 기반 Siri 음성명령도 가능.</p>
+                        </div>`; 
+                    break;
+
+                case 'matter-both':
+                    html = `
+                        <div class="result">
+                            <h2>두 가지 이상 플랫폼 동시 사용</h2>
+                            <p>✓ <strong>matter 버전 모터</strong>를 선택하세요.</p>
+                        </div>`; 
+                    break;
+
+                case 'matter-buy':
+                    html = `
+                        <div class="result">
+                            <h2>✓ matter 컨트롤러 구입 후</h2>
+                            <p>✓ <strong>matter 버전 모터</strong>를 선택하세요.</p>
+                        </div>`; 
+                    break;
+
+                case 'wifi-simple':
+                    html = `
+                        <div class="result">
+                            <h2>허브 구매 없이 간편 사용</h2>
+                            <p>✓ <strong>WiFi 버전</strong>을 선택해서 <strong>SmartLife</strong> 앱에 연결해서 사용하세요.</p>
+                            <p>✓ 설치가 간단하고 별도의 허브 없이 사용 가능합니다.</p>
+                            <p>✓ 구글홈에 연동하여 구글홈 앱 제어 및 음성명령 가능.</p>
+                            <p>✓ 애플 단축어로 Siri 음성명령도 가능.</p>
+                        </div>`; 
+                    break;
+
+                default:
+                    html = `<div class="result"><h2>결과를 준비중입니다...</h2></div>`;
+            }
+            
+            html += `<button class="back-button" onclick="goBack()">이전으로</button><button class="restart-button" onclick="restart()">처음부터 다시 시작</button>`;
+            content.innerHTML = html; 
+            updateStepIndicator();
+        }
+
+        function updateStepIndicator() {
+            const dots = document.querySelectorAll('.step-dot');
+            const depth = currentStep.split('-').length;
+            dots.forEach((dot, idx) => { if (idx < depth) dot.classList.add('active'); else dot.classList.remove('active'); });
+        }
+
+        // 초기 렌더
+        showStep('1');
+    </script>
+</body>
+</html>
